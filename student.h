@@ -13,7 +13,7 @@
 #ifndef __STUDENTS__
 #define __STUDENTS__
 
-#define <cstring>
+#include <cstring>
 
 struct students{
 	int rollNo;			//Stores roll no.
