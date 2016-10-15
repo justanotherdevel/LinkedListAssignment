@@ -1,13 +1,6 @@
 /*
-	*********************Things to include in documentation***************************
-	*
-	*************************************END******************************************
-*/
-
-/*
-	********************************Possible Errors***********************************
-	*
-	***********************************************************************************
+	*This is a header file that declares the structure Students
+	*Implementation of the same can be found in student.cpp
 */
 
 #ifndef __STUDENTS__
@@ -15,19 +8,19 @@
 
 #include <cstring>
 
-struct students{
+struct Students{
 	int rollNo;			//Stores roll no.
 	string name;		//Stores name
 	double marks;		//Stores marks
-	students operator= ();
+	Students operator= ();
 	//Overloading << operator to use in cout
-	friend ostream& operator<< (ostream &, const students);
+	friend ostream& operator<< (ostream &, Students);
 	//To check equality of two operator.
-	bool operator== (const students) const;
+	bool operator== (Students) const;
 	//Some constructors including one copy constructor
-	students ();
-	students (const students &);
-	students (int, string, double);
+	Students ();
+	Students (const Students &);
+	Students (int, string, double);
 }
 
 #endif
