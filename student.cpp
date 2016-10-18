@@ -27,24 +27,18 @@ using namespace std;
 
 /*
 //This let's the structure be used in cout.
-ostream& operator<< (ostream &out, const Students &disp){
-	out << "Name of the student: " << disp.name
-		<< "\nRoll number: " << disp.rollNo
-		<< "\nMarks: " << disp.marks;
-	return out;
+ostream& operator<< (ostream &os, const Students &stu){
+	os << stu.name << stu.rollNo;
+	return os;
 }
-
+/*
 //This let's the structure be used in cin
-istream& operator>> (istream &in, Students &input){
-	cout << "Enter name: ";
-	input >> input.name;
-	cout << "Enter roll no: ";
-	input >> input.rollNo;
-	cout << "Enter marks: ";
-	input >> input.marks;
+istream& operator >> (istream &in, Students &input){
+	input >> input.rollNo >> input.name >> input.marks;
 	return input;
 }
 */
+
 //Checks equality for two objects of structure student
 bool Students::operator== (Students check) const{
 	return (check.rollNo == this->rollNo);
