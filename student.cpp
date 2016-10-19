@@ -17,7 +17,7 @@
 	*Program will compile successfully to an object file.
 	*Use the following compilation command:
 	*	g++ -c -o student.o student.cpp -std=c++14
-	***********************************************************************************
+	************************************END********************************************
 */
 
 #include "student.h"
@@ -25,10 +25,10 @@
 
 using namespace std;
 
-/*
+
 //This let's the structure be used in cout.
 ostream& operator<< (ostream &os, const Students &stu){
-	os << stu.name << stu.rollNo;
+	os << stu.rollNo;
 	return os;
 }
 /*
