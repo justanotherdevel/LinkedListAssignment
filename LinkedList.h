@@ -1,7 +1,12 @@
+/*
+	*This file declares the LinkedList class.
+	*Implementation of the same can be found in LinkedList.cpp
+*/
+
 #include "student.h"
 
 class LinkedList {
-		node head, next;
+		Node head;
 		int count;
 	public:
 		LinkedList();
