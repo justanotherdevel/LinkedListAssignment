@@ -81,8 +81,38 @@ void LinkedList::AppendNode (){
 	count++;						//Increases the size of the list
 }
 
+//Insert node after certain roll number.
+//If the roll number is not present, insert at the end of the list.
 void LinkedList::InsertNode (){
-
+	int roll;
+	cout << "\nEnter the roll number following which you want the node to be inserted: ";
+	cin >> roll;
+	int rollNo;
+	string name;
+	double marks;
+	getInfo (rollNo, name, marks);		//Gets the information from the user
+	Node insert = new node (rollNo, name, marks);
+	if (head->rollNo == roll){		//Handles the case where head is the desired object
+		insert->next = head->next;
+		head->next = insert;
+		count++;
+		return;
+	}
+	bool flag = false;
+	Node temp = head;
+	while (temp->next){
+		if (temp->rollNo == roll){
+			flag = true;
+			insert->next = temp->next;
+			temp->next = insert;
+			break;
+		}
+	}
+	if (flag == false){
+		temp->next = insert;
+		insert->next = 0;
+	}
+	count++;
 }
 
 //Search the list based on the roll no. of the student
@@ -132,7 +162,30 @@ void LinkedList::DeleteLastNode (){
 }
 
 void LinkedList::DeleteNode (){
-
+	int roll;
+	cout << "\nEnter roll no. of the student whose data you want to delete: ";
+	cin >> roll;
+	if (roll = head->rollNo){
+		DeleteFirstNode();		//Don't use this method if head is the required object
+		return;
+	}
+	Node temp = head, prev = head;
+	int flag = false;
+	while (temp->next){
+		//We can immediately iterate temp as we've already checked that the first object is not the required object.
+		temp = temp->next;			//temp now points to the node after previous.
+		if (temp->rollNo == roll){		//If node is found
+			prev->next = temp->next;	//Prev now points the node next of temp removing temp from list.
+			delete temp;				//Frees the memory
+			count--;					//Reduces the size by 1
+			flag = true;
+			break;
+		}
+		prev = prev->next;			//Prev now points to the next node (temp).
+	}
+	if (flag == false){
+		cout << "\nStudent data not found.";
+	}
 }
 
 void LinkedList::ReverseList (){
