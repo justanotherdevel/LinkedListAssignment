@@ -28,7 +28,7 @@ using namespace std;
 
 //This let's the structure be used in cout.
 ostream& operator<< (ostream &os, const Students &stu){
-	os << stu.rollNo;
+	os << stu.name;
 	return os;
 }
 /*

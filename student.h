@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class Students{
+struct Students{
 	Students *next;
 	int rollNo;			//Stores roll no.
 	string name;		//Stores name
@@ -27,7 +27,8 @@ class Students{
 	~Students ();				//Destructor
 };
 
-typedef Students *link;
+typedef Students node;
+typedef node *link;
 typedef link Node;
 
 #endif

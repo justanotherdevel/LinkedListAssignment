@@ -12,11 +12,10 @@ class LinkedList {
 		LinkedList();
 		~LinkedList();
 		void AllocateNode();
-		void PependNode();
+		void PrependNode();
 		void AppendNode();
 		void InsertNode();
 		void SearchNode();
-		void PrintNode();
 		void PrintList();
 		void DeleteFirstNode();
 		void DeleteLastNode();
