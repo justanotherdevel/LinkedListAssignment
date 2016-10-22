@@ -1,6 +1,10 @@
 # LinkedListAssignment
 Linked list based assignment for data structure.
 
+##Important Notes:
+	*Counting for the purpose of user input starts at 1.
+	*The program takes care of reducing it by 1 to make the actual start from 0.
+
 ##Details about structure Students:
 	Data Members:
 	*rollNo (integer): Stores the roll number of the student.
@@ -8,9 +12,9 @@ Linked list based assignment for data structure.
 	*marks (float): Stores the marks of the student.
 	
 	Member Functions:
-	*overloaded operator "<<" (friend) to allow use of cout.
-	*overloaded operator ">>" (friend) to allow use of cin.
-	*operator '==' to check if two students are the same.
+	*overloaded operator "<<" (friend) to allow use of cout. Returns an output stream object.
+	*overloaded operator ">>" (friend) to allow use of cin. Returns an input stream object.
+	*operator '==' to check if two students are the same. It returns a boolean value to check equality.
 	*Constructor Students() to allow declaration without providing parameter.
 	*Constructor Students(const Students &) to copy data from existing object.
 	*Students (int, string, double) to initialize with given data.
@@ -53,3 +57,21 @@ Linked list based assignment for data structure.
 	*main.cpp: It is the interface file which also contains int main () and the program begins execution at this file.
 	*makefile.mak: A GNU makefile to automate the compilation and linking process.
 
+##Notes about compilation:
+	Compilation method:
+	*Compiled on g++ with C++ standard set to C++14.
+	*Should work fine on slightly older standards like C++11.
+	*Created a make file which does the entire compilation by itself.
+
+##Error Log
+	Errors during initial testing:
+	*Overloading of "<<" and ">>" not working: FIXED- iostream not included in student.h
+	*Printing random hexadecimal value instead of the node details: FIXED- iterator not dereferenced.
+	*ListIntersection is not working.
+	*ListUnion is not working properly.
+	*InsertNode is not working properly.
+
+##Odd behaviours
+	Weird behavious due to unexpected input:
+	*Two nodes in any particular list should not have same roll number but that is not being checked (to avoid linear time complexity for prepend)
+	*Current implementation does not allow for addition of new nodes once second time.

@@ -32,13 +32,20 @@ ostream& operator<< (ostream &os, Students &stu){
 	   << "\nMarks: " << stu.marks;
 	return os;
 }
-/*
+
 //This let's the structure be used in cin
 istream& operator >> (istream &in, Students &input){
-	input >> input.rollNo >> input.name >> input.marks;
-	return input;
+	cout << "\nEnter Roll No: ";
+	in >> input.rollNo;
+	in.clear();
+	in.ignore (1000, '\n');
+	cout << "Enter Name: ";
+	getline (in, input.name);
+	cout << "Enter Marks: ";
+	in >> input.marks;
+	return in;
 }
-*/
+
 
 //Checks equality for two objects of structure student
 bool Students::operator== (Students check) const{
