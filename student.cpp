@@ -12,23 +12,24 @@
 
 /*
 	********************************Possible Errors***********************************
-	*Overloading operators '<<' and '>>' not working.
-	*Commenting out the issue part
-	*Program will compile successfully to an object file.
 	*Use the following compilation command:
 	*	g++ -c -o student.o student.cpp -std=c++14
+	*Or else use the provided make file to build the entire project
 	************************************END********************************************
 */
 
 #include "student.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 
 //This let's the structure be used in cout.
-ostream& operator<< (ostream &os, const Students &stu){
-	os << stu.name;
+ostream& operator<< (ostream &os, Students &stu){
+	os << "Roll number: " << stu.rollNo
+	   << "\nName: " << stu.name
+	   << "\nMarks: " << stu.marks;
 	return os;
 }
 /*

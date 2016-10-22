@@ -26,10 +26,10 @@ inline void getInfo (int &roll, string &name, double &marks){
 	cout << "\nEnter rollNo: ";
 	cin >> roll;
 	cout << "Enter Name: ";
-	getline (cin, name);
-	//Ensuring that cin is free of error flags and the buffer is clean
 	cin.clear ();
 	cin.ignore (1000, '\n');
+	getline (cin, name);
+	//Ensuring that cin is free of error flags and the buffer is clean
 	cout << "Enter marks: ";
 	cin >> marks;
 }
@@ -49,17 +49,13 @@ LinkedList::~LinkedList(){
 	}
 }
 
-void LinkedList::AllocateNode (){
-
-}
-
 //Adds new student data at the beginning of the list.
 void LinkedList::PrependNode (){		//Adds a new node at the beginning of the list
 	int rollNo;
 	string name;
 	double marks;
 	getInfo (rollNo, name, marks);		//Gets the information from the user
-	Students *temp = new Students (rollNo, name, marks);	//Creates a new object
+	Node temp = new node (rollNo, name, marks);	//Creates a new object
 	temp->next = head;
 	head = temp;				//Head again points to the top
 	count++;					//Increases the current size of list
@@ -125,7 +121,7 @@ void LinkedList::SearchNode (){
 	while (temp){
 		if (temp->rollNo == roll){
 			flag = true;
-			cout << temp;			//Change this if overlading fails.
+			cout << *temp;			//Change this if overlading fails.
 			break;
 		}
 	}
@@ -134,11 +130,34 @@ void LinkedList::SearchNode (){
 	}
 } 
 
+//Prints the details of the student given the roll number.
+void LinkedList::PrintNode (){
+	int roll;
+	cout << "\nEnter Roll number you want to check: ";
+	cin >> roll;
+	Node temp = head;
+	bool flag = false;
+	while (temp){
+		if (temp->rollNo == roll){
+			cout << *temp;			//Prints the details of the student
+			flag = true;
+			break;
+		}
+	}
+	if (flag == false){
+		cout << "\nStudent details not present in the list.";
+	}
+}
+
 //Prints the entire list.
 void LinkedList::PrintList (){
+	if (count == 0){
+		cout << "List is empty.";
+		return;
+	}
 	Node temp = head;
 	while (temp){
-		cout << temp << endl;
+		cout << *temp << endl;
 		temp = temp->next;		//Iterates temp to the next node.
 	}
 }
@@ -188,8 +207,20 @@ void LinkedList::DeleteNode (){
 	}
 }
 
+//Reverses the list
 void LinkedList::ReverseList (){
-
+	Node currentNode, prevNode, nextNode;
+	currentNode = prevNode = nextNode = head;
+	currentNode = currentNode->next;	//current node now points to the object next of head
+	while (currentNode){
+		nextNode = currentNode->next;
+		if (nextNode == 0){
+			head = currentNode;			//Changes the head
+		}
+		currentNode->next = prevNode;
+		prevNode = currentNode;
+		currentNode = nextNode;
+	}
 }
 
 void LinkedList::ListUnion (){
@@ -205,10 +236,10 @@ void LinkedList::FindMthToLast (){
 	cout << "\nEnter which element you want to print form the end of the list: ";
 	cin >> N;
 	N = count - N;			//Computes the position from the beginning
+	N--;
 	Node temp = head;
 	while (N--){			//Changes temp to the node we want.
 		temp = temp->next;
 	}
-	cout << temp;
+	cout << *temp;
 }
-

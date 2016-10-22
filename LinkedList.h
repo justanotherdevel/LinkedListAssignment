@@ -4,6 +4,7 @@
 */
 
 #include "student.h"
+#include <iostream>
 
 class LinkedList {
 		Node head;
@@ -11,11 +12,11 @@ class LinkedList {
 	public:
 		LinkedList();
 		~LinkedList();
-		void AllocateNode();
 		void PrependNode();
 		void AppendNode();
 		void InsertNode();
 		void SearchNode();
+		void PrintNode();
 		void PrintList();
 		void DeleteFirstNode();
 		void DeleteLastNode();

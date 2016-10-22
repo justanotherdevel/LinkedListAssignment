@@ -7,6 +7,7 @@
 #define __STUDENTS__
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ struct Students{
 	string name;		//Stores name
 	double marks;		//Stores marks
 	//Overloading << operator to use in cout
-	friend ostream& operator<< (ostream&, const Students&);
+	friend ostream& operator<< (ostream&, Students&);
 	friend istream& operator>> (istream &input, Students&);
 	//To check equality of two operator.
 	bool operator== (Students) const;
