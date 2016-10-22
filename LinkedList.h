@@ -22,7 +22,7 @@ class LinkedList {
 		void DeleteLastNode();
 		void DeleteNode();
 		void ReverseList();
-		void ListUnion();
-		void ListIntersection();
+		friend void ListUnion(LinkedList, LinkedList);
+		friend void ListIntersection(LinkedList, LinkedList);
 		void FindMthToLast();
 };

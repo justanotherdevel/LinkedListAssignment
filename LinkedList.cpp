@@ -5,15 +5,8 @@
 */
 
 /*
-	*********************Things to include in documentation***************************
-	*
-	*************************************END******************************************
-*/
-
-/*
 	********************************Possible Errors***********************************
 	*In AppendNode, the loop to traverse to the end of the list.
-	*Change display methods if overloading fails.
 	************************************END********************************************
 */
 
@@ -22,16 +15,8 @@
 #include <iostream>
 
 //Gets the information of the students from the user.
-inline void getInfo (int &roll, string &name, double &marks){
-	cout << "\nEnter rollNo: ";
-	cin >> roll;
-	cout << "Enter Name: ";
-	cin.clear ();
-	cin.ignore (1000, '\n');
-	getline (cin, name);
-	//Ensuring that cin is free of error flags and the buffer is clean
-	cout << "Enter marks: ";
-	cin >> marks;
+inline void getInfo (node &temp){
+	cin >> temp;
 }
 
 LinkedList::LinkedList (){
@@ -51,11 +36,9 @@ LinkedList::~LinkedList(){
 
 //Adds new student data at the beginning of the list.
 void LinkedList::PrependNode (){		//Adds a new node at the beginning of the list
-	int rollNo;
-	string name;
-	double marks;
-	getInfo (rollNo, name, marks);		//Gets the information from the user
-	Node temp = new node (rollNo, name, marks);	//Creates a new object
+	node input;
+	getInfo (input);		//Gets the information from the user
+	Node temp = new node (input);	//Creates a new object
 	temp->next = head;
 	head = temp;				//Head again points to the top
 	count++;					//Increases the current size of list
@@ -63,11 +46,9 @@ void LinkedList::PrependNode (){		//Adds a new node at the beginning of the list
 
 //Adds new student data at the end of the list.
 void LinkedList::AppendNode (){
-	int rollNo;
-	string name;
-	double marks;
-	getInfo (rollNo, name, marks);		//Gets the information from the user
-	Node temp = new node (rollNo, name, marks);
+	node input;
+	getInfo (input);		//Gets the information from the user
+	Node temp = new node (input);
 	temp->next = 0;
 	Node temp2 = head;
 	while (temp2->next){			//Goes to the end of the list
@@ -83,11 +64,9 @@ void LinkedList::InsertNode (){
 	int roll;
 	cout << "\nEnter the roll number following which you want the node to be inserted: ";
 	cin >> roll;
-	int rollNo;
-	string name;
-	double marks;
-	getInfo (rollNo, name, marks);		//Gets the information from the user
-	Node insert = new node (rollNo, name, marks);
+	node input;
+	getInfo (input);		//Gets the information from the user
+	Node insert = new node (input);
 	if (head->rollNo == roll){		//Handles the case where head is the desired object
 		insert->next = head->next;
 		head->next = insert;
@@ -223,12 +202,64 @@ void LinkedList::ReverseList (){
 	}
 }
 
-void LinkedList::ListUnion (){
-
+//Prints the union of the two list
+void ListUnion (LinkedList A, LinkedList B){
+	Node templ = A.head, tempr = B.head;		//Initializes two iterators for separate lists.
+	bool *flag = new bool[B.count];	//Keeps a flag if node is two be included.
+	for (int i = 0; i < A.count; i++)
+		flag[i] = true;				//Assuming we need to print everything. Will modify it later for the nodes that does not need to be printed.
+	short count = 0;
+	while (templ){
+		tempr = B.head;
+		count = 0;
+		while (tempr){
+			if (templ == tempr){
+				flag[count] = false;		//We don't need to print this.
+				break;
+			}
+			count++;
+			tempr = tempr->next;
+		}
+		templ = templ->next;
+	}
+	A.PrintList();
+	tempr = B.head, count = 0;		//Again initializes tempr and count
+	while (tempr){
+		if (flag[count] == true)
+			cout << *tempr << endl;
+		count++;					//Increases the flag counter
+		tempr = tempr->next;		//Iterators increment by one node.
+	}
+	//Frees the memory occupied by flags.
+	delete []flag;
 }
 
-void LinkedList::ListIntersection (){
-
+//Prints the details of the students that are common in both the list.
+void ListIntersection (LinkedList A, LinkedList B){
+	Node templ = A.head, tempr = B.head;		//Initializes the nodes
+	bool *flag = new bool[A.count];
+	for (int i = 0; i < A.count; i++)
+		flag[i] = false;
+	int count = 0;			//Stores the count for flag
+	while (templ){
+		tempr = B.head;
+		while (tempr){
+			if (templ == tempr){
+				flag[count] = true;		//Marks that the object is common in both the list.
+			}
+		}
+		count++;
+	}
+	templ = A.head, count = 0;
+	//Iterate over list A and print only if element was also found in list B
+	while (templ){
+		if (flag[count] == true)
+			cout << *templ;
+		count++;
+		templ = templ->next;
+	}
+	//Frees the memory taken by flag.
+	delete []flag;
 }
 
 void LinkedList::FindMthToLast (){
