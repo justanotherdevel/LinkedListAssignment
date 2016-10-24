@@ -8,3 +8,4 @@ LinkedListAssignment: *.o
 
 clean:
 	rm *.o LinkedListAssignment
+

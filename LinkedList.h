@@ -23,6 +23,6 @@ class LinkedList {
 		void DeleteNode();
 		void ReverseList();
 		friend void ListUnion(LinkedList, LinkedList);
-		friend void ListIntersection(LinkedList, LinkedList);
+		friend void ListIntersection(const LinkedList, const LinkedList);
 		void FindMthToLast();
 };

@@ -50,6 +50,11 @@ void LinkedList::AppendNode (){
 	getInfo (input);		//Gets the information from the user
 	Node temp = new node (input);
 	temp->next = 0;
+	if (count == 0){
+		head = temp;
+		count++;
+		return;
+	}
 	Node temp2 = head;
 	while (temp2->next){			//Goes to the end of the list
 		temp2 = temp2->next;		//Check for correctness 1.
@@ -82,6 +87,7 @@ void LinkedList::InsertNode (){
 			temp->next = insert;
 			break;
 		}
+		temp = temp->next;				//Forgot to add this step. Iterates the pointer to next node.
 	}
 	if (flag == false){
 		temp->next = insert;
@@ -103,6 +109,7 @@ void LinkedList::SearchNode (){
 			cout << *temp;			//Change this if overlading fails.
 			break;
 		}
+		temp = temp->next;
 	}
 	if (flag == false){
 		cout << "Student data not found.";
@@ -122,6 +129,7 @@ void LinkedList::PrintNode (){
 			flag = true;
 			break;
 		}
+		temp = temp->next;
 	}
 	if (flag == false){
 		cout << "\nStudent details not present in the list.";
@@ -151,11 +159,23 @@ void LinkedList::DeleteFirstNode (){
 
 //Deletes the last node of the list
 void LinkedList::DeleteLastNode (){
-	Node temp = head;
-	while (temp->next){
-		temp = temp->next; 		//Iterates temp to the next node
+	Node temp = head, prev = head;
+	if (count == 1){
+		head = 0;				//Head now again points to 0
+		delete temp;
+		count--;
+		return;
 	}
-	delete temp;			//Hopefully temp still points to the last node :P
+	temp = temp->next;
+	while (temp){
+		if (!temp->next){ 		//Iterates temp to the next node
+			prev->next = 0;		//prev->next now points to null.
+			delete temp;
+			break;
+		}	
+		prev = temp;			//prev now points to current
+		temp = temp->next;		//
+	}
 	count--;				//Reduces the size of the list by 1
 }
 
@@ -163,7 +183,7 @@ void LinkedList::DeleteNode (){
 	int roll;
 	cout << "\nEnter roll no. of the student whose data you want to delete: ";
 	cin >> roll;
-	if (roll = head->rollNo){
+	if (roll == head->rollNo){
 		DeleteFirstNode();		//Don't use this method if head is the required object
 		return;
 	}
@@ -179,7 +199,7 @@ void LinkedList::DeleteNode (){
 			flag = true;
 			break;
 		}
-		prev = prev->next;			//Prev now points to the next node (temp).
+		prev = temp;			//Prev now points to the next node (temp).
 	}
 	if (flag == false){
 		cout << "\nStudent data not found.";
@@ -188,78 +208,58 @@ void LinkedList::DeleteNode (){
 
 //Reverses the list
 void LinkedList::ReverseList (){
-	Node currentNode, prevNode, nextNode;
-	currentNode = prevNode = nextNode = head;
-	currentNode = currentNode->next;	//current node now points to the object next of head
-	while (currentNode){
-		nextNode = currentNode->next;
-		if (nextNode == 0){
-			head = currentNode;			//Changes the head
-		}
-		currentNode->next = prevNode;
-		prevNode = currentNode;
-		currentNode = nextNode;
+	Node prev, current, next;
+	prev = 0;						//Ensures that the last element will be NULL
+	current = head;
+	while (current){
+		next = current->next;		//next points to next
+		current->next = prev;		//link changed to prev
+		prev = current;				//prev points to current
+		current = next;				//current is iterated
 	}
+	head = prev;					//head now points to the current top
 }
 
-//Prints the union of the two list
+//Prints the union of the two listF
 void ListUnion (LinkedList A, LinkedList B){
-	Node templ = A.head, tempr = B.head;		//Initializes two iterators for separate lists.
-	bool *flag = new bool[B.count];	//Keeps a flag if node is two be included.
-	for (int i = 0; i < A.count; i++)
-		flag[i] = true;				//Assuming we need to print everything. Will modify it later for the nodes that does not need to be printed.
-	short count = 0;
-	while (templ){
-		tempr = B.head;
-		count = 0;
-		while (tempr){
-			if (templ == tempr){
-				flag[count] = false;		//We don't need to print this.
+	Node tempA = A.head, tempB = B.head;		//Initializes iterators to both list
+	while (tempA){
+		cout << *tempA << endl;					//Prints entire list A without checking anything
+		tempA = tempA->next;
+	}
+	while (tempB){
+		bool flag = true;					//Assumes that we need to print the node of list B
+		tempA = A.head;			
+		while (tempA){
+			if (*tempA == *tempB){
+				flag = false;				//If the node was already present in node A, don't print it again
 				break;
 			}
-			count++;
-			tempr = tempr->next;
+			tempA = tempA->next;
 		}
-		templ = templ->next;
+		if (flag == true)
+			cout << *tempB << endl;			//Print only after checking if it is required
+		tempB = tempB->next;
 	}
-	A.PrintList();
-	tempr = B.head, count = 0;		//Again initializes tempr and count
-	while (tempr){
-		if (flag[count] == true)
-			cout << *tempr << endl;
-		count++;					//Increases the flag counter
-		tempr = tempr->next;		//Iterators increment by one node.
-	}
-	//Frees the memory occupied by flags.
-	delete []flag;
 }
 
 //Prints the details of the students that are common in both the list.
-void ListIntersection (LinkedList A, LinkedList B){
-	Node templ = A.head, tempr = B.head;		//Initializes the nodes
-	bool *flag = new bool[A.count];
-	for (int i = 0; i < A.count; i++)
-		flag[i] = false;
-	int count = 0;			//Stores the count for flag
-	while (templ){
-		tempr = B.head;
-		while (tempr){
-			if (templ == tempr){
-				flag[count] = true;		//Marks that the object is common in both the list.
+void ListIntersection (const LinkedList A,const LinkedList B){
+	Node tempA = A.head, tempB = B.head;
+	while (tempA){
+		bool flag = false;			//Assumes the node is not a part of the intersection
+		tempB = B.head;				//Initializes iterator to List B
+		while (tempB){
+			if (*tempA == *tempB){
+				flag = true;		//If node is a part of intersection, marks flag to be true
+				break;
 			}
+			tempB = tempB->next;	//Iterates list B
 		}
-		count++;
+		if (flag == true)
+			cout << *tempA << endl;		//Prints node if it is a part of interscection
+		tempA = tempA->next;
 	}
-	templ = A.head, count = 0;
-	//Iterate over list A and print only if element was also found in list B
-	while (templ){
-		if (flag[count] == true)
-			cout << *templ;
-		count++;
-		templ = templ->next;
-	}
-	//Frees the memory taken by flag.
-	delete []flag;
 }
 
 void LinkedList::FindMthToLast (){

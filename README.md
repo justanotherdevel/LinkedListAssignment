@@ -1,6 +1,9 @@
 # LinkedListAssignment
 Linked list based assignment for data structure.
 
+##Errors (Yet to be fixed):
+	*Call to functions like append and prepend not working after a call to union or intersection is made although they work just fine if a call to union or intersection is not made.
+
 ##Important Notes:
 	*Counting for the purpose of user input starts at 1.
 	*The program takes care of reducing it by 1 to make the actual start from 0.
@@ -67,9 +70,12 @@ Linked list based assignment for data structure.
 	Errors during initial testing:
 	*Overloading of "<<" and ">>" not working: FIXED- iostream not included in student.h
 	*Printing random hexadecimal value instead of the node details: FIXED- iterator not dereferenced.
-	*ListIntersection is not working.
-	*ListUnion is not working properly.
-	*InsertNode is not working properly.
+	*ListIntersection is not working: FIXED - Forgot to dereference in equality check
+	*ListUnion is not working properly: FIXED - Forgot to dereference in equality check
+	*InsertNode is not working properly: FIXED - Iteration overlooked.
+	*SearchNode not working: FIXED - Iteration step overlooked.
+	*DeleteLastNode not working: FIXED - Iteration step overlooked.
+	*ReverseList is not working: FIXED - Last node of the reversed list didn't point to NULL.
 
 ##Odd behaviours
 	Weird behavious due to unexpected input:
