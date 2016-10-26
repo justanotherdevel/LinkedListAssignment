@@ -50,6 +50,7 @@ void LinkedList::AppendNode (){
 	getInfo (input);		//Gets the information from the user
 	Node temp = new node (input);
 	temp->next = 0;
+	//Handles the case where the list is empty 
 	if (count == 0){
 		head = temp;
 		count++;
@@ -67,14 +68,15 @@ void LinkedList::AppendNode (){
 //If the roll number is not present, insert at the end of the list.
 void LinkedList::InsertNode (){
 	int roll;
-	cout << "\nEnter the roll number following which you want the node to be inserted: ";
+	cout << "\nEnter the roll number following which you want the node to be inserted (will be appended to the list if the roll number is not found): ";
 	cin >> roll;
 	node input;
 	getInfo (input);		//Gets the information from the user
 	Node insert = new node (input);
-	if (head->rollNo == roll){		//Handles the case where head is the desired object
-		insert->next = head->next;
-		head->next = insert;
+	//Handles the case when the list is empty
+	if (count == 0){
+		head = insert;
+		insert->next = 0;
 		count++;
 		return;
 	}
@@ -219,6 +221,7 @@ void LinkedList::ReverseList (){
 	}
 	head = prev;					//head now points to the current top
 }
+
 
 //Prints the union of the two listF
 void ListUnion (LinkedList A, LinkedList B){

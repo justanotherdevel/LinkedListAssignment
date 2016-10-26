@@ -3,6 +3,7 @@ Linked list based assignment for data structure.
 
 ##Errors (Yet to be fixed):
 	*Call to functions like append and prepend not working after a call to union or intersection is made although they work just fine if a call to union or intersection is not made.
+	*Menu call goes into infinite loop if the entered value is not an integer.
 
 ##Important Notes:
 	*Counting for the purpose of user input starts at 1.
