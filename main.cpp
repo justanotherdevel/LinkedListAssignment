@@ -23,15 +23,15 @@ ostream& pos (ostream &position){
 inline void menu (){
 	system ("cls");
 	cout << "\n\n\n" << pos << "\t" << "MENU";
-	cout << pos << "1. Allocate Node";
-	cout << pos << "2. Prepend Node";
-	cout << pos << "3. Append Node";
-	cout << pos << "4. Insert Node";
-	cout << pos << "5. Search List";
-	cout << pos << "6. Print Node";
-	cout << pos << "7. Print List";
-	cout << pos << "8. Delete First Node";
-	cout << pos << "9. Delete Last Node";
+	cout << pos << "1.  Allocate Node";
+	cout << pos << "2.  Prepend Node";
+	cout << pos << "3.  Append Node";
+	cout << pos << "4.  Insert Node";
+	cout << pos << "5.  Search List";
+	cout << pos << "6.  Print Node";
+	cout << pos << "7.  Print List";
+	cout << pos << "8.  Delete First Node";
+	cout << pos << "9.  Delete Last Node";
 	cout << pos << "10. Delete Node";
 	cout << pos << "11. Reverse List";
 	cout << pos << "12. List Union";
