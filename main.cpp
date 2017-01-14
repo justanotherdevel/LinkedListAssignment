@@ -21,7 +21,7 @@ ostream& pos (ostream &position){
 
 //Displays the menu
 inline void menu (){
-	system ("cls");
+	system ("clear");
 	cout << "\n\n\n" << pos << "\t" << "MENU";
 	cout << pos << "1.  Allocate Node";
 	cout << pos << "2.  Prepend Node";
@@ -134,11 +134,11 @@ int main (){
 		menu ();			//Displays the menu
 		short choice;
 		cin >> choice;		//Takes user input
-		system ("cls");
+		system ("clear");
 		bool exitStat = Choice (choice);	//Takes action depending on the input.
 		cout << endl;
 		if (exitStat)
 			return 0;
-		system ("pause");
+		getchar();
 	}
 }
