@@ -141,5 +141,6 @@ int main (){
 			return 0;
 		cin.clear();
 		cin.ignore(1000, '\n');
+		getchar();
 	}
 }

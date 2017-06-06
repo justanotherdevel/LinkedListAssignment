@@ -147,7 +147,6 @@ void LinkedList::PrintList (){
 		cout << *temp << endl;
 		temp = temp->next;		//Iterates temp to the next node.
 	}
-	getchar();
 }
 
 //Deletes the first node from the beginning.
