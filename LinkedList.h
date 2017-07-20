@@ -1,6 +1,6 @@
 /*
 	*This file declares the LinkedList class.
-	*Implementation of the same can be found in LinkedList.cpp.
+	*Implementation of the same can be found in LinkedList.cpp
 */
 
 #include "student.h"
