@@ -10,9 +10,9 @@
 	************************************END********************************************
 */
 
+#include <iostream>
 #include "LinkedList.h"
 #include "student.h"
-#include <iostream>
 
 //Gets the information of the students from the user.
 inline void getInfo (node &temp){
@@ -180,7 +180,7 @@ void LinkedList::DeleteLastNode (){
 	count--;				//Reduces the size of the list by 1
 }
 
-void LinkedList::DeleteNode (){
+/*void LinkedList::DeleteNode (){
 	int roll;
 	cout << "\nEnter roll no. of the student whose data you want to delete: ";
 	cin >> roll;
@@ -205,6 +205,27 @@ void LinkedList::DeleteNode (){
 	if (flag == false){
 		cout << "\nStudent data not found.";
 	}
+} */
+
+void LinkedList::DeleteNode (){
+	int rno;
+	cout << "\nEnter roll no. of the student whose data you want to delete: ";
+	cin >> rno;
+	Node *iter = &head;
+	bool flag = false;
+	while (*iter) {
+		if ((*iter)->rollNo == rno) {
+			Node del = *iter;
+			*iter = (*iter)->next;
+			count--;
+			delete del;
+			flag = true;
+			break;
+		}
+		iter = &(*iter)->next;
+	}
+	if (!flag)
+		cout << "\nStudent data not found";
 }
 
 //Reverses the list

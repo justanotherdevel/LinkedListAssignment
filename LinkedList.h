@@ -2,6 +2,8 @@
 	*This file declares the LinkedList class.
 	*Implementation of the same can be found in LinkedList.cpp
 */
+#ifndef __LINKED_LIST_H__
+#define __LINKED_LIST_H__
 
 #include "student.h"
 #include <iostream>
@@ -26,3 +28,5 @@ class LinkedList {
 		friend void ListIntersection(const LinkedList, const LinkedList);
 		void FindMthToLast();
 };
+
+#endif
